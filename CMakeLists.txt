@@ -13,9 +13,9 @@ file(GLOB OPENGL_SRC
 add_library(OpenGL-Utils STATIC ${OPENGL_SRC})
 
 target_link_libraries(OpenGL-Utils PUBLIC 
-    glm glew_s glfw freetype
+    glm glew_s glfw freetype general_utils
 )
 
 target_include_directories(OpenGL-Utils PUBLIC 
-   src ${GLM_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${GLFW_INCLUDE_DIR} ${FREETYPE_INCLUDE_DIR}
+   src ${GLM_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${GLFW_INCLUDE_DIR} ${FREETYPE_INCLUDE_DIR} ${GENERAL_UTILS_INCLUDE_DIR}
 )

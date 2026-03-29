@@ -60,3 +60,16 @@ if (NOT FreeType_FOUND)
 endif()
 set_target_properties(freetype PROPERTIES FOLDER "Dependencies")
 
+# General utils.
+find_package(General-Utils QUIET)
+if (NOT General-Utils_FOUND)
+    # General utils
+    FetchContent_Declare(
+        general_utils
+        GIT_REPOSITORY https://github.com/Will-Repo/General-Utilities.git
+        GIT_TAG main
+        GIT_SHALLOW TRUE
+    )
+    FetchContent_MakeAvailable(general_utils)  
+    set(GENERAL_UTILS_INCLUDE_DIR ${general_utils_SOURCE_DIR}/src)
+endif()
