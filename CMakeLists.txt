@@ -6,7 +6,7 @@ project(OpenGL-Utils)
 
 include(Dependencies.cmake)
 
-file(GLOB CORE_SRC
+file(GLOB OPENGL_SRC
     src/*.cpp
 )
 
