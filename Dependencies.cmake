@@ -71,5 +71,5 @@ if (NOT General-Utils_FOUND)
         GIT_SHALLOW TRUE
     )
     FetchContent_MakeAvailable(general_utils)  
-    set(GENERAL_UTILS_INCLUDE_DIR ${General-Utils_SOURCE_DIR}/src)
+    set(GENERAL_UTILS_INCLUDE_DIR ${general_utils_SOURCE_DIR}/src)
 endif()
