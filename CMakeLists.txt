@@ -6,6 +6,10 @@ project(OpenGL-Utils)
 
 include(Dependencies.cmake)
 
+file(GLOB CORE_SRC
+    src/*.cpp
+)
+
 add_library(OpenGL-Utils STATIC ${OPENGL_SRC})
 
 target_link_libraries(OpenGL-Utils PUBLIC 
