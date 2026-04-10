@@ -47,10 +47,10 @@ void createVAO(unsigned int& VAO, const std::vector<float>& vertices) {
 
 std::vector<float> getQuad(glm::vec2 centre, float width, float height) {
     std::vector<float> quad = {
-        centre.x - 0.5 * width, centre.y - 0.5 * width,
-        centre.x + 0.5 * width, centre.y - 0.5 * width,
-        centre.x - 0.5 * width, centre.y + 0.5 * width,
-        centre.x + 0.5 * width, centre.y + 0.5 * width,
+        centre.x - 0.5 * width, centre.y - 0.5 * height,
+        centre.x + 0.5 * width, centre.y - 0.5 * height,
+        centre.x - 0.5 * width, centre.y + 0.5 * height,
+        centre.x + 0.5 * width, centre.y + 0.5 * height,
     };
     return quad;
 }
