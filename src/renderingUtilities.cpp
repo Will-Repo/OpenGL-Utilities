@@ -34,12 +34,12 @@ void setUpFramebuffer(GLuint* framebuffer, GLuint* texture) {
 }
 
 // Return VAO for drawing a quad.
-void createVAO(unsigned int& VAO, float[][] vertices) {
-    glGenVertexArrays(1, VAO);
+void createVAO(unsigned int& VAO, const std::vector<float>& vertices) {
+    glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
     unsigned int VBO;
-    glGenBuffers(1, VBO);
+    glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 }
