@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "renderingUtilities.h"
+#include <glm/glm.hpp>
 
 void setUpFramebuffer(GLuint* framebuffer, GLuint* texture) {
     glGenFramebuffers(1, framebuffer);
@@ -42,4 +43,30 @@ void createVAO(unsigned int& VAO, const std::vector<float>& vertices) {
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+}
+
+std::vector<float> getQuad(glm::vec2 centre, float width, float height) {
+    std::vector<float> quad = {
+        centre.x - 0.5 * width, centre.y - 0.5 * width,
+        centre.x + 0.5 * width, centre.y - 0.5 * width,
+        centre.x - 0.5 * width, centre.y + 0.5 * width,
+        centre.x + 0.5 * width, centre.y + 0.5 * width,
+    };
+    return quad;
+}
+
+std::vector<int> getQuadEBO() {
+    std::vector<int> ebo = {
+        1, 2, 3,
+        2, 3, 4
+    };
+    return ebo;
+}
+
+// VAO should be bound currently.
+void bindEBO(const std::vector<int>& indices) {
+    unsigned int ebo;
+    glGenBuffers(1, &ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(int), indices.data(), GL_STATIC_DRAW);
 }
