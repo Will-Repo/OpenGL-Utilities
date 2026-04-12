@@ -16,7 +16,7 @@ class TextRenderer {
             glm::ivec2   Bearing;
             unsigned int NextOffset;    // Offset to advance to next glyph
         };
-        void addFace(std::string name, std::string filePath, FilePaths* filePaths);
+        void addFace(std::string name, std::string filePath);
         std::map<char, Character> getCharacters(FT_Face face);
         void renderText(std::string faceName, std::string text, float x, float y, float scale, glm::vec3 colour, FilePaths* filePaths);
     private:
