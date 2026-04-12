@@ -12,7 +12,7 @@ GLuint loadShaders(ShaderInfo* info, std::string dirPath) {
         if (info[enumType].dataType == ShaderDataType::Path) {
             const char* filePath = info[enumType].data;
             sourceString = getFileContents((dirPath + "/" + filePath).c_str());
-        } else if (info[enumType].dataType == ShaderDataType::Path) {
+        } else if (info[enumType].dataType == ShaderDataType::Source) {
             sourceString = info[enumType].data;
         }
         GLuint shader = compileShader(info[enumType].type, sourceString);
