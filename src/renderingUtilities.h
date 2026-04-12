@@ -5,6 +5,6 @@
 
 void setUpFramebuffer(GLuint* framebuffer, GLuint* texture);
 void createVAO(unsigned int& VAO, const std::vector<float>& vertices);
-std::vector<float> getQuad(glm::vec2 centre, float width, float height);
+std::vector<float> getQuad(glm::vec2 centre, float width, float height, glm::vec3 colour);
 std::vector<int> getQuadEBO();
 void bindEBO(const std::vector<int>& indices);

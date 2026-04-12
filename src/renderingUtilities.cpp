@@ -45,12 +45,13 @@ void createVAO(unsigned int& VAO, const std::vector<float>& vertices) {
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 }
 
-std::vector<float> getQuad(glm::vec2 centre, float width, float height) {
+// Takes in normalised opengl values.
+std::vector<float> getQuad(glm::vec2 centre, float width, float height, glm::vec3 colour) {
     std::vector<float> quad = {
-        centre.x - 0.5 * width, centre.y - 0.5 * height,
-        centre.x + 0.5 * width, centre.y - 0.5 * height,
-        centre.x - 0.5 * width, centre.y + 0.5 * height,
-        centre.x + 0.5 * width, centre.y + 0.5 * height,
+        centre.x - 0.5 * width, centre.y - 0.5 * height, colour.x, colour.y, colour.z,
+        centre.x + 0.5 * width, centre.y - 0.5 * height, colour.x, colour.y, colour.z,
+        centre.x - 0.5 * width, centre.y + 0.5 * height, colour.x, colour.y, colour.z,
+        centre.x + 0.5 * width, centre.y + 0.5 * height, colour.x, colour.y, colour.z
     };
     return quad;
 }
