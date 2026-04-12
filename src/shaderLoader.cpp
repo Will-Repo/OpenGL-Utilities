@@ -4,13 +4,17 @@
 #include <iostream>
 #include <string>
 #include "fileReading.h"
-#include "FilePaths.h"
 
-GLuint loadShaders(ShaderInfo* info, FilePaths* filePaths) {
+GLuint loadShaders(ShaderInfo* info, std::string dirPath) {
     GLuint program = glCreateProgram();
     for (int enumType = 0; info[enumType].type != GL_NONE; enumType++) {
-        const char* filePath = info[enumType].filePath;
-        std::string sourceString = getFileContents((filePaths->executablePath + "/" + filePaths->shadersPath + "/" + filePath).c_str());
+        std::string sourceString;
+        if (info[enumType].dataType == ShaderDataType::Path) {
+            const char* filePath = info[enumType].data;
+            sourceString = getFileContents((dirPath + "/" + filePath).c_str());
+        } else if (info[enumType].dataType == ShaderDataType::Path) {
+            sourceString = info[enumType].data;
+        }
         GLuint shader = compileShader(info[enumType].type, sourceString);
         glAttachShader(program, shader);
         glDeleteShader(shader);
@@ -39,20 +43,3 @@ GLuint compileShader(GLenum type, std::string sourceString) {
 
     return shader;
 }
-
-// If calling from core, use fixed core path instead.
-GLuint loadShadersCore(ShaderInfo* info, FilePaths* filePaths) {
-    GLuint program = glCreateProgram();
-    for (int enumType = 0; info[enumType].type != GL_NONE; enumType++) {
-        const char* filePath = info[enumType].filePath;
-        std::string sourceString = getFileContents((filePaths->executablePath + "/" + filePaths->corePath + "/shaders/" + filePath).c_str());
-        GLuint shader = compileShader(info[enumType].type, sourceString);
-        glAttachShader(program, shader);
-        glDeleteShader(shader);
-    }
-    glLinkProgram(program);
-    //TODO: Error check.
-    
-    return program;
-}
-

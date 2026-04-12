@@ -104,13 +104,38 @@ void TextRenderer::renderText(std::string faceName, std::string text, float x, f
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0); 
 
+    std::string vert = 
+        "#version 330 core"
+        "layout (location = 0) in vec4 vertex; // <vec2 pos, vec2 tex>"
+        "out vec2 TexCoords;"
+        ""
+        "uniform mat4 projection;"
+        ""
+        "void main()"
+        "{  "
+        "    gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);"
+        "    TexCoords = vertex.zw;"
+        "}  ";
+    std::string frag =
+        "#version 330 core"
+        "in vec2 TexCoords;"
+        "out vec4 color;"
+        ""
+        "uniform sampler2D text;"
+        "uniform vec3 textColor;"
+        ""
+        "void main()"
+        "{    "
+        "    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);"
+        "    color = vec4(textColor, 1.0) * sampled;"
+        "}    ";
     ShaderInfo shaders[] = {
-        {GL_VERTEX_SHADER, "text.vert"},
-        {GL_FRAGMENT_SHADER, "text.frag"},
-        {GL_NONE, NULL},
+        {GL_VERTEX_SHADER, vert.c_str(), ShaderDataType::Source},
+        {GL_FRAGMENT_SHADER, frag.c_str(), ShaderDataType::Source},
+        {GL_NONE, NULL, ShaderDataType::Source},
     };
-
-    GLuint program = loadShadersCore(shaders, filePaths);
+    
+    GLuint program = loadShaders(shaders, "");
     glUseProgram(program);
     glUniform3f(glGetUniformLocation(program, "textColor"), colour.x, colour.y, colour.z);
     glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));

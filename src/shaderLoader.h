@@ -3,14 +3,18 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <string>
-#include "FilePaths.h"
+
+enum class ShaderDataType {
+    Path,
+    Source
+};
 
 struct ShaderInfo {
     GLenum type;
-    const char* filePath; //File path from shaders directory.
+    const char* data; //File path from shaders directory, or full source.
+    ShaderDataType dataType;
 };
 
-GLuint loadShaders(ShaderInfo* info, FilePaths* filePaths);
+// Takes in array of shaders with names, and path to directory containing them.
+GLuint loadShaders(ShaderInfo* info, std::string dirPath);
 GLuint compileShader(GLenum type, std::string sourceString);
-
-GLuint loadShadersCore(ShaderInfo* info, FilePaths* filePaths);
