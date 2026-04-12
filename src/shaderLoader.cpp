@@ -39,6 +39,7 @@ GLuint compileShader(GLenum type, std::string sourceString) {
     if(!success) {
         glGetShaderInfoLog(shader, 512, NULL, infoLog);
         std::cout << "Shader compilation failed: " << type << ", " << infoLog << std::endl;
+        std::cout << "Source: " << sourceString << std::endl;
     };
 
     return shader;
