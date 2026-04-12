@@ -10,7 +10,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "shaderLoader.h"
 #include <glm/gtc/type_ptr.hpp>
-#include "FilePaths.h"
 
 TextRenderer::TextRenderer() {
     int error = FT_Init_FreeType(&library);
@@ -20,14 +19,13 @@ TextRenderer::TextRenderer() {
     }
 }
 
-//File path is from fonts directory.
-void TextRenderer::addFace(std::string name, std::string filePath, FilePaths* filePaths) {
+//File path is path to face. 
+void TextRenderer::addFace(std::string name, std::string filePath) {
     if (faces.find(name) != faces.end()) {
         std::cout << "Font already loaded" << std::endl;
         return;
     }
     FT_Face face;
-    filePath = filePaths->executablePath + "/" +  filePaths->fontsPath + "/" + filePath;
     int error = FT_New_Face(library, filePath.c_str(), 0, &face); //TODO: switch this to config struct filepath.
     //TODO: error handiling
     if (error == FT_Err_Unknown_File_Format) {
