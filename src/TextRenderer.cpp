@@ -103,30 +103,30 @@ void TextRenderer::renderText(std::string faceName, std::string text, float x, f
     glBindVertexArray(0); 
 
     std::string vert = 
-        "#version 330 core"
-        "layout (location = 0) in vec4 vertex; // <vec2 pos, vec2 tex>"
-        "out vec2 TexCoords;"
-        ""
-        "uniform mat4 projection;"
-        ""
-        "void main()"
-        "{  "
-        "    gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);"
-        "    TexCoords = vertex.zw;"
-        "}  ";
+        "#version 330 core\n"
+        "layout (location = 0) in vec4 vertex; // <vec2 pos, vec2 tex>\n"
+        "out vec2 TexCoords;\n"
+        "\n"
+        "uniform mat4 projection;\n"
+        "\n"
+        "void main()\n"
+        "{  \n"
+        "    gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);\n"
+        "    TexCoords = vertex.zw;\n"
+        "}  \n";
     std::string frag =
-        "#version 330 core"
-        "in vec2 TexCoords;"
-        "out vec4 color;"
-        ""
-        "uniform sampler2D text;"
-        "uniform vec3 textColor;"
-        ""
-        "void main()"
-        "{    "
-        "    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);"
-        "    color = vec4(textColor, 1.0) * sampled;"
-        "}    ";
+        "#version 330 core\n"
+        "in vec2 TexCoords;\n"
+        "out vec4 color;\n"
+        "\n"
+        "uniform sampler2D text;\n"
+        "uniform vec3 textColor;\n"
+        "\n"
+        "void main()\n"
+        "{    \n"
+        "    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);\n"
+        "    color = vec4(textColor, 1.0) * sampled;\n"
+        "}    \n";
     ShaderInfo shaders[] = {
         {GL_VERTEX_SHADER, vert.c_str(), ShaderDataType::Source},
         {GL_FRAGMENT_SHADER, frag.c_str(), ShaderDataType::Source},
