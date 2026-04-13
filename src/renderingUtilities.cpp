@@ -34,16 +34,17 @@ void setUpFramebuffer(GLuint* framebuffer, GLuint* texture) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-// Return VAO for drawing a quad.
-void createVAO(unsigned int& VAO, const std::vector<float>& vertices) {
+/*// Return VAO for drawing a quad.
+template <typename T>
+void createVAO(unsigned int& VAO, const std::vector<T>& vertices) {
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
     unsigned int VBO;
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
-}
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(T), vertices.data(), GL_STATIC_DRAW);
+}*/
 
 // Takes in normalised opengl values.
 std::vector<float> getQuad(glm::vec2 centre, float width, float height, glm::vec3 colour) {
@@ -65,9 +66,9 @@ std::vector<int> getQuadEBO() {
 }
 
 // VAO should be bound currently.
-void bindEBO(const std::vector<int>& indices) {
+void bindEBO(const std::vector<unsigned int>& indices) {
     unsigned int ebo;
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(int), indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 }

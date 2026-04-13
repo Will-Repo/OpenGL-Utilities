@@ -1,5 +1,7 @@
-/*#include <string>
+#pragma once
+#include <string>
 #include <vector>
+#include "Mesh.h"
 
 class Model {
     public:
@@ -10,5 +12,6 @@ class Model {
         void loadModel(std::string path);
         void processNode(aiNode *node, const aiScene *scene);
         Mesh processMesh(aiMesh *mesh, const aiScene *scene);
-        std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName);
-}*/
+        std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
+        std::string dir; // Path to textures.
+};
