@@ -57,8 +57,8 @@ std::vector<float> getQuad(glm::vec2 centre, float width, float height, glm::vec
     return quad;
 }
 
-std::vector<int> getQuadEBO() {
-    std::vector<int> ebo = {
+std::vector<unsigned int> getQuadEBO() {
+    std::vector<unsigned int> ebo = {
         0, 1, 2,
         1, 2, 3
     };
