@@ -67,6 +67,10 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
             vec.x = mesh->mTextureCoords[0][i].x; 
             vec.y = mesh->mTextureCoords[0][i].y;
             vertex.texCoords = vec;
+        } else {
+            vertex.texCoords = glm::vec2(0.0f, 0.0f);
+        }
+        if(mesh->HasTangentsAndBitangents()) {
             vector.x = mesh->mTangents[i].x;
             vector.y = mesh->mTangents[i].y;
             vector.z = mesh->mTangents[i].z;
@@ -76,7 +80,8 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
             vector.z = mesh->mBitangents[i].z;
             vertex.biTangent = vector;
         } else {
-            vertex.texCoords = glm::vec2(0.0f, 0.0f);
+            vertex.tangent = glm::vec3(0.0f, 0.0f, 0.0f);
+            vertex.biTangent = glm::vec3(0.0f, 0.0f, 0.0f);
         }
         vertices.push_back(vertex);
     }
