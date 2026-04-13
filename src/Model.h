@@ -8,6 +8,7 @@
 
 class Model {
     public:
+        Model() = default; // For cases where objects allocated immediately - must be overriden before use.
         Model(std::string path);
         void drawModel(unsigned int program);
     private:
