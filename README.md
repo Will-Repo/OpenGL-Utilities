@@ -16,3 +16,4 @@ Top-level dependencies (libraries and minimum versions the top-level project mus
 
 ## To-do
 * Properly accredit dependencies, include licenses.
+* Remove filepaths object references, use fixed path - renderText.
