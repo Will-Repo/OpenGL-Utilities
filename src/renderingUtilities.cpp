@@ -44,10 +44,10 @@ void setUpFramebuffer(GLuint* framebuffer, GLuint* texture) {
 // Takes in normalised opengl values.
 std::vector<float> getQuad(glm::vec2 centre, float width, float height, glm::vec3 colour) {
     std::vector<float> quad = {
-        (float)(centre.x - 0.5 * width), (float)(centre.y - 0.5 * height), (float)(colour.x, colour.y, colour.z),
-        (float)(centre.x + 0.5 * width), (float)(centre.y - 0.5 * height), (float)(colour.x, colour.y, colour.z),
-        (float)(centre.x - 0.5 * width), (float)(centre.y + 0.5 * height), (float)(colour.x, colour.y, colour.z),
-        (float)(centre.x + 0.5 * width), (float)(centre.y + 0.5 * height), (float)(colour.x, colour.y, colour.z)
+        (float)(centre.x - 0.5 * width), (float)(centre.y - 0.5 * height), colour.x, colour.y, colour.z,
+        (float)(centre.x + 0.5 * width), (float)(centre.y - 0.5 * height), colour.x, colour.y, colour.z,
+        (float)(centre.x - 0.5 * width), (float)(centre.y + 0.5 * height), colour.x, colour.y, colour.z,
+        (float)(centre.x + 0.5 * width), (float)(centre.y + 0.5 * height), colour.x, colour.y, colour.z
     };
     return quad;
 }
