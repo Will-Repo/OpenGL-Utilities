@@ -24,6 +24,7 @@ class Mesh {
         std::vector<Vertex> vertices;
         std::vector<unsigned int> indices;
         std::vector<Texture> textures;
+        float opacity = 1.0f;
     private:
         unsigned int VAO;
         void setupMesh();

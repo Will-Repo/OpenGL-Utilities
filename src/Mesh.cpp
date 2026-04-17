@@ -43,6 +43,8 @@ void Mesh::drawMesh(unsigned int program) {
     }
     glActiveTexture(GL_TEXTURE0);
 
+    // Set alpha value to opacity.
+    glUniform1f(glGetUniformLocation(program, "material.opacity"), opacity);
     // draw mesh
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
