@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "renderingUtilities.h"
+#include <iostream>
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures) : vertices(vertices), indices(indices), textures(textures) {
     setupMesh();
@@ -25,6 +26,7 @@ void Mesh::setupMesh() {
 void Mesh::drawMesh(unsigned int program) {
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
+    std::cout << "Texture count: " << textures.size() << "." std::endl;
     for(unsigned int i = 0; i < textures.size(); i++) {
         glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
         // retrieve texture number (the N in diffuse_textureN)
