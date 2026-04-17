@@ -107,16 +107,16 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType 
     for (int i = 0; i < mat->GetTextureCount(type); i++) {
         aiString str;
         mat->GetTexture(type, i, &str);
-        for (int j = 0; j < textures.size(); j++) {
-            if (!(std::strcmp(textures[j].path.data(), str.C_Str()))) {
+        //for (int j = 0; j < textures.size(); j++) {
+          //  if (!(std::strcmp(textures[j].path.data(), str.C_Str()))) {
                 Texture texture;
                 texture.id = TextureFromFile((dir + "/" + str.C_Str()).c_str(), false);
                 texture.type = typeName;
                 texture.path = str.C_Str();
                 textures.push_back(texture);
                 break;
-            }
-        }
+            //}
+        //}
     }
     return textures;
 }  
