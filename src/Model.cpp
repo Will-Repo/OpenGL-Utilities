@@ -93,30 +93,33 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
     }  
     if (mesh->mMaterialIndex >= 0) {
         aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-        std::vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-        textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-        std::vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-        textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+        loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", textures);
+        loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", textures);
     }  
     return Mesh(vertices, indices, textures);
 }
 
 //TODO: Check my implementation is correct.
-std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName) {
-    std::vector<Texture> textures;
+void Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, std::vector<Texture>& meshTextures) {
     for (int i = 0; i < mat->GetTextureCount(type); i++) {
         aiString str;
         mat->GetTexture(type, i, &str);
-        //for (int j = 0; j < textures.size(); j++) {
-          //  if (!(std::strcmp(textures[j].path.data(), str.C_Str()))) {
-                Texture texture;
-                texture.id = TextureFromFile((dir + "/" + str.C_Str()).c_str(), false);
-                texture.type = typeName;
-                texture.path = str.C_Str();
-                textures.push_back(texture);
-                //break;
-            //}
-        //}
+        bool skip = false;
+        for (Texture tex : loadedTextures) {
+            //strcmp returns 0 (false) if strings match.
+            if (!std::strcmp(tex.path.data(), str.C_Str())) {
+                meshTextures.push_back(tex);
+                skip = true;
+                break;
+            }
+        }
+        if (!skip) {
+            Texture texture;
+            texture.id = TextureFromFile((dir + "/" + str.C_Str()).c_str(), false);
+            texture.type = typeName;
+            texture.path = str.C_Str();
+            meshTextures.push_back(texture);
+            loadedTextures.push_back(texture);
+        }
     }
-    return textures;
 }  
