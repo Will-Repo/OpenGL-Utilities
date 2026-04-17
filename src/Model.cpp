@@ -91,13 +91,16 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
             indices.push_back(face.mIndices[j]);
         }
     }  
+    float opacity = 1.0f;
     if (mesh->mMaterialIndex >= 0) {
         aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
         loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", textures);
         loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", textures);
-        material->Get(AI_MATKEY_OPACITY, mesh->opacity);
+        material->Get(AI_MATKEY_OPACITY, opacity);
     }  
-    return Mesh(vertices, indices, textures);
+    Mesh meshObject = Mesh(vertices, indices, textures);
+    meshObject.opacity = opacity;
+    return meshObject;
 }
 
 //TODO: Check my implementation is correct.
