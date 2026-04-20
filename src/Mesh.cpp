@@ -4,6 +4,14 @@
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures) : vertices(vertices), indices(indices), textures(textures) {
     setupMesh();
+    
+    // Set up AABB.
+    aabb.min = vertices[0].position;
+    aabb.max = vertices[0].position;
+    for (int i = 1; i < vertices.size(); ++i) {
+        aabb.min = glm::min(vertices[i].position, aabb.min);
+        aabb.max = glm::min(vertices[i].position, aabb.max);
+    }
 }
 
 void Mesh::setupMesh() {

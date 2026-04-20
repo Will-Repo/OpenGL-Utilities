@@ -17,6 +17,11 @@ struct Texture {
     std::string path;  // For comparison with other textures.
 };  
 
+struct AABB {
+    glm::vec3 min;
+    glm::vec3 max;
+};
+
 class Mesh {
     public:
         Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
@@ -25,6 +30,7 @@ class Mesh {
         std::vector<unsigned int> indices;
         std::vector<Texture> textures;
         float opacity = 1.0f;
+        AABB aabb;
     private:
         unsigned int VAO;
         void setupMesh();
